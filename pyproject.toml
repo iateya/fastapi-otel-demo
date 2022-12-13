@@ -1,0 +1,23 @@
+[tool.poetry]
+name = "fastapi-otel-demo"
+version = "0.1.0"
+description = ""
+authors = ["Ibrahim Ateya <ibrahim.ateya@ansys.com>"]
+readme = "README.md"
+packages = [{include = "fastapi_otel_demo"}]
+
+[tool.poetry.dependencies]
+python = "^3.8"
+
+fastapi="^0.88.0"
+uvicorn="^0.20.0"
+pyyaml="^5.3.1"
+opentelemetry-instrumentation-logging = {version = "^0.36b0", allow-prereleases = true}
+opentelemetry-instrumentation-fastapi = {version = "^0.36b0", allow-prereleases = true}
+opentelemetry-sdk = "^1.15.0"
+opentelemetry-exporter-otlp = "^1.15.0"
+python-json-logger = "^2.0.4"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

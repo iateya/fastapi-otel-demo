@@ -1,0 +1,16 @@
+version: 1
+disable_existing_loggers: False
+formatters:
+  fileFormat:
+    format: '%(asctime)s %(levelname)s [%(name)s] [%(filename)s:%(lineno)d] [trace_id=%(otelTraceID)s span_id=%(otelSpanID)s resource.service.name=%(otelServiceName)s]- %(message)s'
+handlers:
+  rotatingFile:
+    class: logging.handlers.TimedRotatingFileHandler
+    level: INFO
+    formatter: fileFormat
+    when: 'MIDNIGHT'
+    filename: '/data/file.log'
+
+root:
+  level: INFO
+  handlers: [rotatingFile]

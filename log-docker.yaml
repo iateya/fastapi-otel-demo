@@ -1,0 +1,22 @@
+version: 1
+disable_existing_loggers: False
+formatters:
+  otelJson:
+    '()': pythonjsonlogger.jsonlogger.JsonFormatter
+    format: '%(asctime)s %(levelname)s [%(name)s] [%(filename)s:%(lineno)d] [trace_id=%(otelTraceID)s span_id=%(otelSpanID)s resource.service.name=%(otelServiceName)s]- %(message)s'
+  console:
+    format: '%(asctime)s - %(levelname)s:%(name)s:%(message)s"'
+handlers:
+  otelJson:
+    class: logging.StreamHandler
+    level: INFO
+    formatter: otelJson
+    stream: ext://sys.stdout
+  console:
+    class: logging.StreamHandler
+    level: DEBUG
+    formatter: console
+    stream: ext://sys.stdout
+root:
+  level: INFO
+  handlers: [otelJson]
