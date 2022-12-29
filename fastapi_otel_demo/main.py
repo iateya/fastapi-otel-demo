@@ -18,9 +18,10 @@ app = FastAPI(title="Sample FastAPI Application",
 
 def init_otel():
     resource = Resource(attributes={"service.name": "fastApi_otel_demo"})
-    trace.set_tracer_provider(TracerProvider(resource=resource))
     LoggingInstrumentor().instrument()
-    FastAPIInstrumentor.instrument_app(app)
+    FastAPIInstrumentor.instrument_app(app=app, tracer_provider=TracerProvider(resource=resource))
+
+
 
 init_otel()
 logger = logging.getLogger(__name__)
@@ -33,4 +34,4 @@ def say_hello():
 
 
 if __name__ == "__main__":
-    uvicorn.run("main:app", port=9000, reload=True , log_config='log-desktop.yaml')
+    uvicorn.run("main:app", port=9000, reload=True , log_config='log-docker.yaml')
